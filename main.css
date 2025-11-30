@@ -20,6 +20,20 @@ body {
   margin-left: 77%;
 }
 
+/* login-card */
+.login-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 300px;
+  height: 400px;
+  border-radius: 20px;
+  margin-top: 10%;
+  margin-left: 35%;
+  padding: 20px; 
+  align-items: center;
+  text-align: center;
+}
+
+/* main-card */
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   width: 1000px;
