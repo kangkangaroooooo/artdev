@@ -1,0 +1,20 @@
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    margin: 50;
+    padding: 50;
+    background-color: rgb(19, 27, 17);
+}
+
+.navbar {
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.search-bar {
+  flex-grow: 1;
+  margin-left: 50%;
+}
