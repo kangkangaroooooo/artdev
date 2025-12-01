@@ -28,27 +28,7 @@
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
-    // ENABLE THIS
-    const allowedEmails = ["kangkangaroooooo@gmail.com"];
-
-    document.querySelector(".google-btn").addEventListener("click", () => {
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                const email = result.user.email;
-
-                if (!allowedEmails.includes(email)) {
-                    alert("This Google account is not authorized.");
-                    signOut(auth);
-                } else {
-                    alert("Login successful!");
-                    window.location.href = "artdev.html";
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-                alert("Login failed.");
-            });
-    });
+    import { allowedEmails } from './google-acc.js';
 </script>
 
 </body>
