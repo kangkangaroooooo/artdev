@@ -22,13 +22,33 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-     import { firebaseConfig } from './firebase-config.js';
+    import { firebaseConfig } from './firebase-config.js';
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
     import { allowedEmails } from './google-acc.js';
+
+    
+    document.querySelector(".google-btn").addEventListener("click", () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const email = result.user.email;
+
+                if (!allowedEmails.includes(email)) {
+                    alert("This Google account is not authorized.");
+                    signOut(auth);
+                } else {
+                    alert("Login successful!");
+                    window.location.href = "artdev.html";
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("Login failed.");
+            });
+    });
 </script>
 
 </body>
