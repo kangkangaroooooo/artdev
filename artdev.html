@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
     <title>ArtDev</title>
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
@@ -21,75 +23,179 @@
         <img src="---" alt="Profile" id="profileBtn">
 
         <div class="dropmenu" id="dropdownMenu">
-            <!-- User name with link to Google Account settings -->
-            <a href="https://myaccount.google.com/?hl=en&utm_source=OGB&utm_medium=act&gar=WzJd" target="_blank" id="accountName">
-                <img id="accountPic" src="---" alt="Profile" style="width:30px;height:30px;border-radius:50%;margin-right:5px;">
+            <a href="https://myaccount.google.com/" target="_blank" id="accountName">
+                <img id="accountPic" src="---" alt="Profile" class="nav-profile-pic">
                 <span id="accountText">Username</span>
             </a>
-            <a href="#">Add Profiles</a>
+            <a href="#" id="openProfileManager">Add Profiles</a>
             <a href="#">Settings</a>
             <a href="#" id="logoutBtn">Logout</a>
         </div>
     </div>
 </nav>
 
-<div class="card">
+<!-- Profile Manager Card -->
+<div class="profile-card" id="profileManagerCard">
+    <h2>Manage Profiles</h2>
+    <input type="text" id="newProfileName" placeholder="Enter profile name">
+    <input type="file" id="newProfilePic" accept="image/*">
+    <button id="addProfileBtn">Add Profile</button>
+
+    <h3>Added Profiles</h3>
+    <div id="profileList"></div>
+
+    <button id="closeProfileManager">Close</button>
+</div>
+
+<!-- Main Card -->
+<div class="main-card">
     <h1>Hey there! Welcome to ArtDev — My Personal Digital Portfolio.</h1>
     <p>It's a web-based platform where creativity meets professionalism, showcasing my works and profile in one place.</p>
     <div class="quotes">“Why settle for one when I can be both?”</div>
 
-    <div class="roles">
-        <div class="role-item">
-            <img src="---" alt="Digital Illustrator">
-            <h3>Digital Illustrator</h3>
-        </div>
-        
-        <div class="role-item">
-            <img src="---" alt="Web Developer">
-            <h3>Web Developer</h3>
-        </div>
+    <!-- Added profiles -->
+    <div class="roles" id="rolesContainer">
+        <div class="added-profiles" id="addedProfilesContainer"></div>
     </div>
 </div>
 
 <footer>© 2025 ArtDev | Designed and developed by @kangkangarooo</footer>
 
 <script>
+    // Navbar Elements
     const profileBtn = document.getElementById('profileBtn');
     const dropdownMenu = document.getElementById('dropdownMenu');
     const accountText = document.getElementById('accountText');
     const accountPic = document.getElementById('accountPic');
     const logoutBtn = document.getElementById('logoutBtn');
+    const openProfileManager = document.getElementById('openProfileManager');
 
-    // Load saved Google info from localStorage
-    const userName = localStorage.getItem("artdevName");
-    const userPic = localStorage.getItem("artdevPic");
+    // Profile Manager Elements
+    const profileManagerCard = document.getElementById('profileManagerCard');
+    const newProfileName = document.getElementById('newProfileName');
+    const newProfilePic = document.getElementById('newProfilePic');
+    const addProfileBtn = document.getElementById('addProfileBtn');
+    const profileList = document.getElementById('profileList');
+    const closeProfileManager = document.getElementById('closeProfileManager');
+    const addedProfilesContainer = document.getElementById('addedProfilesContainer');
 
-    if (userName) {
-        accountText.innerText = userName;
+    // Load saved Google info
+    const savedName = localStorage.getItem("artdevName");
+    const savedPic = localStorage.getItem("artdevPic");
+    if (savedName) accountText.innerText = savedName;
+    if (savedPic) {
+        profileBtn.src = savedPic;
+        accountPic.src = savedPic;
     }
 
-    if (userPic) {
-        profileBtn.src = userPic;
-        accountPic.src = userPic;
-    }
-
-    // Toggle dropdown menu
-    profileBtn.addEventListener('click', (e) => {
+    // Dropdown toggle
+    profileBtn.addEventListener('click', e => {
         e.stopPropagation();
         dropdownMenu.classList.toggle('show');
     });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!dropdownMenu.contains(e.target)) {
-            dropdownMenu.classList.remove('show');
-        }
+    document.addEventListener('click', e => {
+        if (!dropdownMenu.contains(e.target)) dropdownMenu.classList.remove('show');
     });
 
     // Logout
     logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem("artdevName");
+        localStorage.removeItem("artdevPic");
         window.location.href = "login.html";
     });
+
+    // Open Profile Manager
+    openProfileManager.addEventListener('click', e => {
+        e.preventDefault();
+        profileManagerCard.style.display = 'block';
+        dropdownMenu.classList.remove('show');
+    });
+
+    closeProfileManager.addEventListener('click', () => {
+        profileManagerCard.style.display = 'none';
+    });
+
+    // Profile Manager Logic
+    let profiles = JSON.parse(localStorage.getItem('profiles')) || [];
+
+    function displayProfiles() {
+        profileList.innerHTML = '';
+        addedProfilesContainer.innerHTML = '';
+
+        profiles.forEach((profile, index) => {
+            // Manager card
+            const div = document.createElement('div');
+            div.className = 'profile-item';
+            div.innerHTML = `
+                <img src="${profile.pic}" alt="${profile.name}" class="profile-thumb">
+                <span>${profile.name}</span>
+                <button onclick="deleteProfile(${index})">Delete</button>
+            `;
+            profileList.appendChild(div);
+
+            // Main card display
+            const profileDiv = document.createElement('div');
+            profileDiv.className = 'profile-item';
+            profileDiv.innerHTML = `
+                <img src="${profile.pic}" alt="${profile.name}" class="profile-thumb">
+                <span>${profile.name}</span>
+            `;
+            addedProfilesContainer.appendChild(profileDiv);
+        });
+    }
+
+    window.deleteProfile = function(index) {
+        profiles.splice(index, 1);
+        localStorage.setItem('profiles', JSON.stringify(profiles));
+        displayProfiles();
+    }
+
+    addProfileBtn.addEventListener('click', () => {
+        const name = newProfileName.value.trim();
+        const file = newProfilePic.files[0];
+        if (!name || !file) return alert("Enter name and choose photo.");
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            profiles.push({name, pic: e.target.result});
+            localStorage.setItem('profiles', JSON.stringify(profiles));
+            displayProfiles();
+            newProfileName.value = '';
+            newProfilePic.value = '';
+        }
+        reader.readAsDataURL(file);
+    });
+
+    displayProfiles();
+
+    // ------------------------------
+    // Google Identity Services
+    // ------------------------------
+    google.accounts.id.initialize({
+        client_id: '216450745602-o6vn9kj4qarsrmadeed88gh7o1kanba8.apps.googleusercontent.com', // replace with your Google Client ID
+        callback: handleCredentialResponse
+    });
+
+    google.accounts.id.prompt(); // show One Tap prompt
+
+    function handleCredentialResponse(response) {
+        const decoded = parseJwt(response.credential);
+        const name = decoded.name;
+        const picture = decoded.picture;
+
+        // Update UI
+        accountText.innerText = name;
+        accountPic.src = picture;
+        profileBtn.src = picture;
+
+        // Save locally
+        localStorage.setItem("artdevName", name);
+        localStorage.setItem("artdevPic", picture);
+    }
+
+    function parseJwt(token) {
+        return JSON.parse(atob(token.split('.')[1]));
+    }
 </script>
 
 </body>
