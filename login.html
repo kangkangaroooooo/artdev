@@ -22,27 +22,31 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-    import { firebaseConfig } from './firebase-config.js'; //firebase config
+    import { firebaseConfig } from './firebase-config.js'; 
+    import { allowedEmails } from './google-acc.js'; 
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
-    import { allowedEmails } from './google-acc.js'; //allowed emails list
-
-    
     document.querySelector(".google-btn").addEventListener("click", () => {
         signInWithPopup(auth, provider)
             .then((result) => {
-                const email = result.user.email;
+                const user = result.user;
+                const email = user.email;
 
                 if (!allowedEmails.includes(email)) {
                     alert("This Google account is not authorized.");
                     signOut(auth);
-                } else {
-                    alert("Login successful!");
-                    window.location.href = "artdev.html";
+                    return;
                 }
+
+                // Save Google account details
+                localStorage.setItem("artdevName", user.displayName);
+                localStorage.setItem("artdevEmail", user.email);
+                localStorage.setItem("artdevPic", user.photoURL);
+
+                window.location.href = "artdev.html";
             })
             .catch((error) => {
                 console.error(error);
