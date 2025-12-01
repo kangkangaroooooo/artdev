@@ -22,13 +22,13 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-    import { firebaseConfig } from './firebase-config.js';
+    import { firebaseConfig } from './firebase-config.js'; //firebase config
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
-    import { allowedEmails } from './google-acc.js';
+    import { allowedEmails } from './google-acc.js'; //allowed emails list
 
     
     document.querySelector(".google-btn").addEventListener("click", () => {
