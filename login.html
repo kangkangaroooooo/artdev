@@ -23,16 +23,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyAOui1AX-Fh5H2L7WrC9wJigdFR8pm7YRQ",
-        authDomain: "artdev-873f2.firebaseapp.com",
-        projectId: "artdev-873f2",
-        // storageBucket: "artdev-873f2.firebasestorage.app",
-        messagingSenderId: "370563487716",
-        appId: "1:370563487716:web:c621268c8eb82c2f6599f1",
-        measurementId: "G-TD6LJKFV0K"
-    };
-
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
