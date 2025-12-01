@@ -11,18 +11,54 @@
         <img src="---" alt="ArtDev">
         <h2>Welcome to ArtDev!</h2>
 
-        <button class="google-btn">
-            <!-- <img src="---" alt="Google Logo"> -->
-            Login with Google
-        </button>
-
-        <button class="guest-btn">
-            Continue as Guest
-        </button>
+        <button class="google-btn">Login with Google</button>
+        <button class="guest-btn">Continue as Guest</button>
 
         <div class="note">
             <p>Login access is limited to authorized personnel.</p>
         </div>
     </div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAOui1AX-Fh5H2L7WrC9wJigdFR8pm7YRQ",
+        authDomain: "artdev-873f2.firebaseapp.com",
+        projectId: "artdev-873f2",
+        // storageBucket: "artdev-873f2.firebasestorage.app",
+        messagingSenderId: "370563487716",
+        appId: "1:370563487716:web:c621268c8eb82c2f6599f1",
+        measurementId: "G-TD6LJKFV0K"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // ENABLE THIS
+    const allowedEmails = ["kangkangaroooooo@gmail.com"];
+
+    document.querySelector(".google-btn").addEventListener("click", () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const email = result.user.email;
+
+                if (!allowedEmails.includes(email)) {
+                    alert("This Google account is not authorized.");
+                    signOut(auth);
+                } else {
+                    alert("Login successful!");
+                    window.location.href = "artdev.html";
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("Login failed.");
+            });
+    });
+</script>
+
 </body>
 </html>
