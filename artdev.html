@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <title>ArtDev</title>
 </head>
 <body>
@@ -21,29 +22,15 @@
         <img src="---" alt="Profile" id="profileBtn">
 
         <div class="dropmenu" id="dropdownMenu">
-            <a href="https://myaccount.google.com/" target="_blank" id="accountName">
+            <a href="#" id="accountName" onclick="return false;" target="_blank" id="accountName">
                 <img id="accountPic" src="---" alt="Profile" class="nav-profile-pic">
                 <span id="accountText">Username</span>
             </a>
-            <a href="#" id="openProfileManager">Add Profiles</a>
             <a href="#">Settings</a>
             <a href="#" id="logoutBtn">Logout</a>
         </div>
     </div>
 </nav>
-
-<!-- Profile Manager Card -->
-<div class="profile-card" id="profileManagerCard">
-    <h2>Manage Profiles</h2>
-    <input type="text" id="newProfileName" placeholder="Enter profile name">
-    <input type="file" id="newProfilePic" accept="image/*">
-    <button id="addProfileBtn">Add Profile</button>
-
-    <h3>Added Profiles</h3>
-    <div id="profileList"></div>
-
-    <button id="closeProfileManager">Close</button>
-</div>
 
 <!-- Main Card -->
 <div class="main-card">
@@ -51,11 +38,7 @@
     <p>It's a web-based platform where creativity meets professionalism, showcasing my works and profile in one place.</p>
     <div class="quotes">“Why settle for one when I can be both?”</div>
 
-    <!-- Added profiles -->
-    <div class="roles" id="rolesContainer">
-        <div class="added-profiles" id="addedProfilesContainer"></div>
-    </div>
-</div>
+    <section class="role"></section>
 
 <footer>© 2025 ArtDev | Designed and developed by @kangkangarooo</footer>
 
@@ -66,16 +49,6 @@
     const accountText = document.getElementById('accountText');
     const accountPic = document.getElementById('accountPic');
     const logoutBtn = document.getElementById('logoutBtn');
-    const openProfileManager = document.getElementById('openProfileManager');
-
-    // Profile Manager Elements
-    const profileManagerCard = document.getElementById('profileManagerCard');
-    const newProfileName = document.getElementById('newProfileName');
-    const newProfilePic = document.getElementById('newProfilePic');
-    const addProfileBtn = document.getElementById('addProfileBtn');
-    const profileList = document.getElementById('profileList');
-    const closeProfileManager = document.getElementById('closeProfileManager');
-    const addedProfilesContainer = document.getElementById('addedProfilesContainer');
 
     // Load saved Google info
     const savedName = localStorage.getItem("artdevName");
@@ -102,79 +75,13 @@
         window.location.href = "login.html";
     });
 
-    // Open Profile Manager
-    openProfileManager.addEventListener('click', e => {
-        e.preventDefault();
-        profileManagerCard.style.display = 'block';
-        dropdownMenu.classList.remove('show');
-    });
-
-    closeProfileManager.addEventListener('click', () => {
-        profileManagerCard.style.display = 'none';
-    });
-
-    // Profile Manager Logic
-    let profiles = JSON.parse(localStorage.getItem('profiles')) || [];
-
-    function displayProfiles() {
-        profileList.innerHTML = '';
-        addedProfilesContainer.innerHTML = '';
-
-        profiles.forEach((profile, index) => {
-            // Manager card
-            const div = document.createElement('div');
-            div.className = 'profile-item';
-            div.innerHTML = `
-                <img src="${profile.pic}" alt="${profile.name}" class="profile-thumb">
-                <span>${profile.name}</span>
-                <button onclick="deleteProfile(${index})">Delete</button>
-            `;
-            profileList.appendChild(div);
-
-            // Main card display
-            const profileDiv = document.createElement('div');
-            profileDiv.className = 'profile-item';
-            profileDiv.innerHTML = `
-                <img src="${profile.pic}" alt="${profile.name}" class="profile-thumb">
-                <span>${profile.name}</span>
-            `;
-            addedProfilesContainer.appendChild(profileDiv);
-        });
-    }
-
-    window.deleteProfile = function(index) {
-        profiles.splice(index, 1);
-        localStorage.setItem('profiles', JSON.stringify(profiles));
-        displayProfiles();
-    }
-
-    addProfileBtn.addEventListener('click', () => {
-        const name = newProfileName.value.trim();
-        const file = newProfilePic.files[0];
-        if (!name || !file) return alert("Enter name and choose photo.");
-
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            profiles.push({name, pic: e.target.result});
-            localStorage.setItem('profiles', JSON.stringify(profiles));
-            displayProfiles();
-            newProfileName.value = '';
-            newProfilePic.value = '';
-        }
-        reader.readAsDataURL(file);
-    });
-
-    displayProfiles();
-
-    // ------------------------------
     // Google Identity Services
-    // ------------------------------
     google.accounts.id.initialize({
         client_id: '216450745602-o6vn9kj4qarsrmadeed88gh7o1kanba8.apps.googleusercontent.com', // replace with your Google Client ID
         callback: handleCredentialResponse
     });
 
-    google.accounts.id.prompt(); // show One Tap prompt
+    // google.accounts.id.prompt(); // show One Tap prompt
 
     function handleCredentialResponse(response) {
         const decoded = parseJwt(response.credential);
