@@ -153,15 +153,88 @@ p {
     font-size: 16px;
 }
 
-.roles {
+.role {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 100px;
+    align-items: flex-start;      /* align items at the top */
+    justify-content: center;      /* center the whole row */
+    gap: 50px;                    /* space between the two roles */
     margin-top: 50px;
-    margin-bottom: 10px;
+    margin-bottom: 50px;
+    flex-wrap: nowrap;            /* prevent wrapping to next line */
 }
 
 .role-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;          /* center image and text horizontally */
     text-align: center;
+    cursor: pointer;
+    width: 250px;                 /* match image width for consistency */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.role-item img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.role-item h2 {
+    font-size: 18px;
+    margin: 0;
+}
+
+
+/* .role-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+} */
+
+a {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* .main-card {
+    width: 90%;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+} */
+
+.cover-photo-container {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.cover-photo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.profile-pic-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin-top: -75px; /* half of profile height to overlap cover */
+    margin-left: 30px;
+}
+
+.profile-pic-container img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid white;
+    object-fit: cover;
 }
