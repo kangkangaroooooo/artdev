@@ -1,0 +1,55 @@
+Simple Website Portfolio
+    - Guest Mode
+    - User/Owner Side
+
+Guest Mode
+    - Can view the website but not allowed to login and do functional requirements
+
+User/Owner Side
+    - Can login using google account but authorized google account
+    - Can edit profile photo and cover photo
+    - Can edit display name and role 
+    - Can upload projects such as images and videos (but commonly upload images)
+    - Can create tags to organize the uploaded files
+    - Can edit profile information such as career objectives, learning journey, what i've accomplished, workshops attended, where i've worked, tools used,
+        contact information, skills
+    - Can logout
+
+FOLDER STRUCTURE
+    /ArtDev
+        index.html (guest mode homepage)
+        login.html (google login/guest mode)
+        user.html (wwner dashboard after login (edit profile, upload projects, etc.).)
+        /js
+            auth.js (handles google login, auth state, and access control.)
+            owner.js (controls editing profile info, roles, name updates.)
+            upload.js (handles cover photo, profile photo, and project uploads.)
+            firebase.js (kung Firebase + configuration)
+│           cloudinary.js (kung Cloudinary (upload widget setup))
+        /css
+            main.css (global styles for all pages.)
+            guest.css (styles for guest pages (clean, static layout).)
+            owner.css (styles for authenticated features (forms, card layout, buttons, etc.).)
+        /images
+            artdev_logo.png
+        /pages
+
+PHASES
+    - Phase 1: Project Structure Setup
+        /Create your folder layout (frontend, backend, assets, components). Prepare your initial files to avoid messy organization later.
+    - Phase 2: Choose Tech Stack
+        /Decide what languages, frameworks, and services you’ll use (e.g., HTML/CSS/JS + Firebase, or PHP + Cloudinary + MySQL).
+    - Phase 3: Build Guest Mode (Static Pages)
+        /Create the public-facing pages (Home, About, Projects). No login or backend yet—just layout and design.
+    - Phase 4: Authentication System
+        /Implement Google Login but restrict it to authorized Google accounts only. This unlocks the Owner Side.
+    - Phase 5: Media Storage Setup
+        /Configure where photos, cover images, and project uploads will be saved (Cloudinary / Firebase Storage / other).
+    - Phase 6: Profile Editing Features
+        /Build UI + backend for editing profile photo, cover photo, display name, and role.
+    - Phase 7: Information Editing System
+        /Add editable sections for: Career objectives, learning journey, accomplishments, workshops, work experience, tools used, contacts, skills.
+    - Phase 8: Project Upload System
+        /Allow uploading images/videos, adding tags, editing or deleting projects.
+    - Phase 9: Deployment & Hosting
+        /Deploy your website to a hosting service (Netlify, Vercel, GitHub Pages, or your chosen backend server). Connect domain if needed.
