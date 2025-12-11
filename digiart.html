@@ -1,117 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="main.css">
-<title>Digital Artist</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main1.css">
+    <title>Digital Artist</title>
 </head>
 <body>
+    <nav class="navbar">
+        <a href="index.html">
+            <img src="---" alt="ArtDev"> <!--Logo-->
+        </a>
 
-<nav class="navbar">
-  <div class="logo">
-    <a href="artdev.html"><img src="---" alt="ArtDev"></a>
-  </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search..."> <!--Search Box-->
+        </div>
 
-  <div class="search-bar">
-    <input type="text" placeholder="Search" />
-  </div>
+        <div class="logout">
+            <img src="---" alt="Login" id="loginBtn"> <!--Logout Button-->
+        </div>
+    </nav>
 
-  <div class="profile">
-    <img src="---" alt="Profile" id="profileBtn">
-    <div class="dropmenu" id="dropdownMenu">
-      <a href="#" id="accountName" onclick="return false;" target="_blank">
-        <img id="accountPic" src="---" alt="Profile" class="nav-profile-pic">
-        <span id="accountText">Username</span>
-      </a>
-      <a href="#">Settings</a>
-      <a href="#" id="logoutBtn">Logout</a>
+    <!--Main Card-->
+    <div class="main-card">
+        <div class="cover">
+            <img src="images/cover1.jpeg">
+        </div>
+        
+        <div class="profile">
+            <img src="images/1.jpeg">
+        </div>
     </div>
-  </div>
-</nav>
 
-<div class="main-card">
-
-  <!-- Cover Photo -->
-  <div class="cover-photo-container">
-    <img id="coverPhoto" src="amooo.jpg" alt="Cover Photo">
-  </div>
-
-  <!-- Profile Picture -->
-  <div class="profile-pic-container">
-    <img id="profilePic" src="amo em.jpg" alt="Profile Picture">
-  </div>
-
-  <div class="profile-name">
-    <h3>Kang Kang</h3>
-    <p1>Digital Artist</p1>
-  </div>
-</div>
-
-<footer>© 2025 ArtDev | Designed and developed by @kangkangarooo</footer>
-
-<script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
-
-<script>
-       // Navbar Elements
-    const profileBtn = document.getElementById('profileBtn');
-    const dropdownMenu = document.getElementById('dropdownMenu');
-    const accountText = document.getElementById('accountText');
-    const accountPic = document.getElementById('accountPic');
-    const logoutBtn = document.getElementById('logoutBtn');
-
-    // Load saved Google info
-    const savedName = localStorage.getItem("artdevName");
-    const savedPic = localStorage.getItem("artdevPic");
-    if (savedName) accountText.innerText = savedName;
-    if (savedPic) {
-        profileBtn.src = savedPic;
-        accountPic.src = savedPic;
-    }
-
-    // Dropdown toggle
-    profileBtn.addEventListener('click', e => {
-        e.stopPropagation();
-        dropdownMenu.classList.toggle('show');
-    });
-    document.addEventListener('click', e => {
-        if (!dropdownMenu.contains(e.target)) dropdownMenu.classList.remove('show');
-    });
-
-    // Logout
-    logoutBtn.addEventListener('click', () => {
-        localStorage.removeItem("artdevName");
-        localStorage.removeItem("artdevPic");
-        window.location.href = "login.html";
-    });
-
-    // Google Identity Services
-    google.accounts.id.initialize({
-        client_id: '216450745602-o6vn9kj4qarsrmadeed88gh7o1kanba8.apps.googleusercontent.com', // replace with your Google Client ID
-        callback: handleCredentialResponse
-    });
-
-    // google.accounts.id.prompt(); // show One Tap prompt
-
-    function handleCredentialResponse(response) {
-        const decoded = parseJwt(response.credential);
-        const name = decoded.name;
-        const picture = decoded.picture;
-
-        // Update UI
-        accountText.innerText = name;
-        accountPic.src = picture;
-        profileBtn.src = picture;
-
-        // Save locally
-        localStorage.setItem("artdevName", name);
-        localStorage.setItem("artdevPic", picture);
-    }
-
-    function parseJwt(token) {
-        return JSON.parse(atob(token.split('.')[1]));
-    }
-</script>
-
+    <footer>
+        © 2025 ArtDev | Designed and developed by @kangkangarooo
+    </footer>
+    
 </body>
 </html>
