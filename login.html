@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/main.css">
     <title>Login</title>
 </head>
 <body>
@@ -22,8 +22,8 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-    import { firebaseConfig } from './firebase-config.js'; 
-    import { allowedEmails } from './google-acc.js'; 
+    import { firebaseConfig } from './js/firebase-config.js'; 
+    import { allowedEmails } from './js/google-acc.js'; 
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -52,6 +52,16 @@
                 console.error(error);
                 alert("Login failed.");
             });
+    });
+    
+    // Guest Mode
+        document.querySelector(".guest-btn").addEventListener("click", () => {
+        localStorage.setItem("artdevName", "Guest User");
+        localStorage.setItem("artdevEmail", "guest@noemail.com");
+        localStorage.setItem("artdevPic", "images/default-guest.png");
+        localStorage.setItem("artdevMode", "guest");
+
+        window.location.href = "index.html";
     });
 </script>
 
