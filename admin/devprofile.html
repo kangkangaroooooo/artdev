@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/logout.css">
+    <title>Web Developer</title>
+</head>
+<body>
+
+        <!--Main Card-->
+    <div class="main-card">
+        <div class="cover">
+            <img src="../images/banner2.jpeg">
+        </div>
+
+        <div class="profile-section">
+            <div class="profile">
+                <img src="../images/icon1.jpeg">
+            </div>
+            <div class="profile-text">
+                <p class="display-name">Issa</p>
+                <p class="role-title">Web Developer</p>
+            </div>
+            
+            <div class="home">
+                <button id="homeBtn">Home</button>
+            </div>
+
+            <div class="portfolio">
+                <button id="portfolioBtn">My Portfolio</button>
+            </div>
+        </div>
+
+        <!--Container-->
+            <div class="container">
+                <div class="cont1">
+                    <h3>
+                        Let's Work Together!
+                    </h3>
+
+                    <div class="email">
+                        <a href="mailto:ibmora00@gmail.com">
+                            <img src="../images/email.png" alt="Email">
+                            <p>ibmora00@gmail.com</p>
+                        </a>    
+                    </div>
+
+                    <div class="fb">
+                        <a href="https://www.facebook.com/issabela.mora.9" target="_blank">
+                            <img src="../images/fb.png" alt="Facebook">
+                            <p>Issabela Mora</p>
+                        </a>
+                    </div>
+
+                    <!-- <div class="ig">
+                        <a href="https://www.instagram.com/kangkangarooo?igsh=MWFudXM4d2p0NTIwZQ==" target="_blank">
+                            <img src="../images/instagram.png" alt="Instagram">
+                            <p>@kangkangarooo</p>
+                        </a>
+                    </div> -->
+                </div>
+
+
+                <div class="cont2">
+                    <h3>
+                        What I Can Do
+                    </h3>
+
+                    <div class="skills">
+                        <ul>
+                            <li>Web Developing</li>
+                            <li>Web Designing</li>
+                            <li>Graphic Design</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="cont3">
+                    <div class="cont4">
+                        <h3>
+                            My Career Objectives
+                        </h3>
+
+                        <div class="obj">
+                            <p>To pursue a career as a web developer where I can apply my programming skills, 
+                                problem-solving abilities, and creativity to design and develop responsive, 
+                                user-friendly websites and web applications while continuously improving my technical expertise.</p>
+                        </div>
+                    </div>
+
+                    <div class="cont5">
+                        <h3>
+                            My Learning Journey
+                        </h3>
+
+                        <div class="edu">
+                            <h4>Tertiary:</h4>
+                            <li>Philippine Christian University (Bachelor of Science in Computer Science)</li>
+
+                            <h4>Upper Secondary:</h4>
+                            <li>Philippine Christian University (STEM)</li>
+
+                            <h4>Lower Secondary</h4>
+                            <li>Bachelor of Science in Computer Science</li>
+
+                            <h4>Elementary</h4>
+                            <li>Colegio de Francesca</li>
+                        </div>
+                    </div>
+
+                    <div class="cont6">
+                        <h3>
+                            What I've Accomplished
+                        </h3>
+
+                        <div class="accomplished">
+                            <li>None</li>
+                        </div>
+                    </div>
+
+                    <div class="cont7">
+                        <h3>
+                            Workshops Attended
+                        </h3>
+
+                        <div class="workshop">
+                            <li>AWScend Beyond Limits: Define Your Domain, Elevate Your Resume</li>
+                        </div>
+                    </div>
+
+                    <div class="cont8">
+                        <h3>
+                            Where I Worked
+                        </h3>
+
+                        <div class="worked">
+                            <li>None</li>
+                        </div>
+                    </div>
+
+                    <div class="cont9">
+                        <h3>
+                            Behind My Creations
+                        </h3>
+
+                        <div class="tools">
+                            <img src="../images/vscode.png" alt="Visual Studio Code">
+                            <img src="../images/vs.png" alt="Visual Studio">
+                            <img src="../images/figma.png" alt="Figma">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+    <footer>
+        © 2025 ArtDev | Designed and developed by @kangkangarooo
+    </footer>
+
+    <!-- Floating logout button -->
+        <button id="logoutFloatBtn" class="floating-logout">Logout</button>
+        <script src="../js/float-logout.js"></script>
+    
+
+    <script>
+        document.getElementById("portfolioBtn").addEventListener("click", function () {
+            window.location.href = "devportfolio.html";
+        });
+    </script>
+
+    <script>
+        document.getElementById("homeBtn").addEventListener("click", function () {
+            window.location.href = "index1.html";
+        });
+    </script>
+
+</body>
+</html>

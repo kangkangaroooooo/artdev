@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/portfolio.css">
+    <link rel="stylesheet" href="../css/logout.css">
+    <title>Digital Artist</title>
+</head>
+<body>
+
+        <!--Main Card-->
+    <div class="main-card">
+        <div class="cover">
+            <img src="../images/banner2.jpeg">
+        </div>
+
+        <div class="profile-section">
+            <div class="profile">
+                <img src="../images/icon1.jpeg">
+            </div>
+            <div class="profile-text">
+                <p class="display-name">Kang Kang</p>
+                <p class="role-title">Digital Artist</p>
+            </div>
+            
+            <div class="home">
+                <button id="homeBtn">Home</button>
+            </div>
+
+            <div class="profile1">
+                <button id="profile1Btn">My Profile</button>
+            </div>
+        </div>
+        
+        <div class="upload">
+            <button type="button" id="uploadBtn">Upload File</button>
+        </div>
+
+        <div class="container" id="gallery"></div>
+
+
+    </div>
+
+    <footer>
+        © 2025 ArtDev | Designed and developed by @kangkangarooo
+    </footer>
+
+    <!-- Floating logout button -->
+        <button id="logoutFloatBtn" class="floating-logout">Logout</button>
+        <script src="../js/float-logout.js"></script>
+    
+
+    <script>
+        document.getElementById("profile1Btn").addEventListener("click", function () {
+            window.location.href = "devprofile.html";
+        });
+    </script>
+
+    <script>
+        document.getElementById("homeBtn").addEventListener("click", function () {
+            window.location.href = "index1.html";
+        });
+    </script>
+    
+    <!-- form upload modal script -->
+    <script src="../js/devformupload.js"></script>
+
+    <script>
+        // Example: listen for the custom event and inspect FormData
+        window.addEventListener('devformupload:submit', function (e) {
+            console.log('Received devformupload:submit');
+            for (const pair of e.detail.entries()) {
+                console.log(pair[0]+ ':', pair[1]);
+            }
+        });
+    </script>
+
+</body>
+</html>

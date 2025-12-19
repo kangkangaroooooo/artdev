@@ -1,0 +1,19 @@
+/* Floating logout button (left side) */
+.floating-logout {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    background: #212121;
+    color: #F0FDF4;
+    border: 2px solid rgba(255,255,255,0.08);
+    padding: 10px 14px;
+    border-radius: 28px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    cursor: pointer;
+    z-index: 1200;
+    font-family: var(--font-family);
+}
+.floating-logout:hover {
+    transform: translateY(-3px);
+    background: #2a2a2a;
+}
