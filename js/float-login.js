@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Build structure identical to login.html so CSS matches exactly
     var logo = document.createElement('img');
-    logo.src = '---';
+    logo.src = '';
     logo.alt = 'ArtDev';
     logo.className = 'login-logo';
     card.appendChild(logo);
